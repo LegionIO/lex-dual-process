@@ -165,6 +165,32 @@ RSpec.describe Legion::Extensions::DualProcess::Helpers::DualProcessEngine do
       expect(result[:success]).to be false
       expect(result[:reason]).to eq(:not_found)
     end
+
+    it 'rejects invalid outcome values' do
+      result = engine.record_outcome(decision_id: decision_id, outcome: :success)
+      expect(result[:success]).to be false
+      expect(result[:reason]).to eq(:invalid_outcome)
+    end
+
+    it 'returns valid outcomes in the error' do
+      result = engine.record_outcome(decision_id: decision_id, outcome: :bad)
+      expect(result[:valid]).to eq(Legion::Extensions::DualProcess::Helpers::Constants::DECISION_OUTCOMES)
+    end
+
+    it 'accepts :correct outcome' do
+      result = engine.record_outcome(decision_id: decision_id, outcome: :correct)
+      expect(result[:success]).to be true
+    end
+
+    it 'accepts :incorrect outcome' do
+      result = engine.record_outcome(decision_id: decision_id, outcome: :incorrect)
+      expect(result[:success]).to be true
+    end
+
+    it 'accepts :uncertain outcome' do
+      result = engine.record_outcome(decision_id: decision_id, outcome: :uncertain)
+      expect(result[:success]).to be true
+    end
   end
 
   describe '#effort_level' do

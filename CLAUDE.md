@@ -9,7 +9,7 @@ Dual-process cognition modeling for the LegionIO cognitive architecture. Impleme
 ## Gem Info
 
 - **Gem name**: `lex-dual-process`
-- **Version**: `0.1.0`
+- **Version**: `0.1.1`
 - **Namespace**: `Legion::Extensions::DualProcess`
 - **Location**: `extensions-agentic/lex-dual-process/`
 
@@ -94,4 +94,5 @@ Central state: `@heuristics` (hash by id), `@decisions` (array, rolling), `@effo
 - Effort budget gates System 2 execution: when depleted, all decisions default to System 1
 - Heuristic matching is domain-based (not semantic) — pattern field is informational, domain is the key
 - Rolling decision log evicts oldest when cap is reached (not importance-based)
+- `record_outcome` validates against `DECISION_OUTCOMES` — only `:correct`, `:incorrect`, `:uncertain` are accepted
 - `effort_label` range: `1.0–0.8 = :automatic`, `0.8–0.6 = :fluent`, `0.6–0.4 = :effortful`, `0.4–0.2 = :strained`, `0.2–0.0 = :depleted`
